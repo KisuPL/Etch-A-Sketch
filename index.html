@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+    <script src="scripts.js" defer></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+    <title>Etch-A-Sketch</title>
+</head>
+<body>
+    <div id="main">
+        <div class="settings">
+            <input id="colourPicker" type="color">
+            <button>not colour</button>
+            <button>colour</button>
+            <button>eraser</button>
+            <button>clear</button>
+        </div>
+        <div id="gridWrapper"></div>
+    </div>
+    <script>
+
+        function changeColor(e) {
+        if (e.type === 'mouseover' && !mouseDown) return
+        e.target.style.backgroundColor = "black"
+        }
+        
+        document.addEventListener("dragstart", e => e.preventDefault());
+        
+        let mouseDown = false
+        document.body.onmousedown = () => (mouseDown = true)
+        document.body.onmouseup = () => (mouseDown = false)
+
+        let drawingAreaSize = ($(window).width())*0.4;
+        let gridSize = 16;
+        let gridWrapper = document.getElementById("gridWrapper");
+        gridWrapper.style.border="2px,solid,red";
+        gridWrapper.style.width=`${drawingAreaSize}px`;
+        gridWrapper.style.height=`${drawingAreaSize}px`;
+
+        for (let i = 0; i < gridSize; i++){
+            let column = document.createElement("div");
+            column.id = "column";
+            column.style.backgroundColor = "black"
+            gridWrapper.appendChild(column);
+        }
+
+            let columnList = document.querySelectorAll("#column");
+            let columnArray = Array.from(columnList)
+            console.log(columnArray)
+            columnArray.forEach(column => {
+                for (let j = 0; j < gridSize; j++){
+                    let row = document.createElement("div");
+                    row.id = "row";
+                    row.style.width=`${drawingAreaSize/gridSize}px`
+                    row.style.height=`${drawingAreaSize/gridSize}px`
+                    row.style.backgroundColor = "white"
+                    row.addEventListener("mouseover",() => {
+                        row.style.opacity = 0.5
+                    })
+                    row.addEventListener("mouseout",() => {
+                        row.style.opacity = 1
+                    })
+                    row.addEventListener("mouseover", changeColor)
+                    row.addEventListener("mousedown",changeColor)
+                    column.appendChild(row);
+                }
+            })
+
+    </script>
+</body>
+</html>

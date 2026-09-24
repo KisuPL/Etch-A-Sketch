@@ -1,0 +1,29 @@
+body{
+    display: flex;
+    height: 100dvh;
+    justify-content: center;
+    align-items: center;
+}
+
+#main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10vw;
+}
+
+.settings{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3vh;
+    flex-wrap: nowrap;
+}
+#gridWrapper {
+  display: flex;
+
+}
+#column {
+  flex: 1;
+}
