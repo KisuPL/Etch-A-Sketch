@@ -4,8 +4,8 @@ function clearDrawingArea(){
     }
 }
 
-function setUpDrawingArea(gridSize = 16) {
-for (let i = 0; i < gridSize; i++){
+function setUpDrawingArea(newSize = 16) {
+for (let i = 0; i < newSize; i++){
     let column = document.createElement("div");
     column.id = "column";
     column.style.backgroundColor = "black";
@@ -15,11 +15,12 @@ for (let i = 0; i < gridSize; i++){
     let columnList = document.querySelectorAll("#column");
     let columnArray = Array.from(columnList);
     columnArray.forEach(column => {
-        for (let j = 0; j < gridSize; j++){
+        for (let j = 0; j < newSize; j++){
             let row = document.createElement("div");
             row.id = "row";
-            row.style.width=`${drawingAreaSize/gridSize}px`;
-            row.style.height=`${drawingAreaSize/gridSize}px`;
+
+            row.style.width=`${drawingAreaSize/newSize}px`;
+            row.style.height=`${drawingAreaSize/newSize}px`;
             row.style.backgroundColor = "white";
             row.addEventListener("mouseover",() => {
                 row.style.opacity = 0.5;
@@ -92,9 +93,6 @@ let mouseDown = false
 document.body.onmousedown = () => (mouseDown = true)
 document.body.onmouseup = () => (mouseDown = false)
 
-let gridSize = document.getElementById("gridSize");
-
-
 let buttonList = document.querySelectorAll(".toggleable")
 let buttonArray = Array.from(buttonList)
 buttonArray.forEach(button => {
@@ -117,4 +115,14 @@ eraserButton.addEventListener("click",eraserMode)
 let gridWrapper = document.getElementById("gridWrapper");
 let drawingAreaSize = window.getComputedStyle(gridWrapper).getPropertyValue("width").replace("px","");
 
-setUpDrawingArea();
+
+let gridSize = document.getElementById("gridSize");
+let gridSizeOutput = gridSize.nextElementSibling;
+gridSize.addEventListener("input", () => {
+    gridSizeOutput.value = gridSize.value
+
+});
+
+gridSize.addEventListener("change", updateGridSize);
+
+setUpDrawingArea(16);

@@ -28,14 +28,16 @@ body{
 .gridSizeSettings{
   width: 100%;
   text-align: center;
+  touch-action: auto;
 }
 
 #gridSize{
   margin-top: 5px;
+
 }
 #gridWrapper {
   display: flex;
-  width: 30vw;
+  width: 30svw;
   height: 30vw;
   border: 2px solid black
 
