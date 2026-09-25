@@ -24,6 +24,15 @@ body{
 .settings * {
   width: 75%;
 }
+
+.gridSizeSettings{
+  width: 100%;
+  text-align: center;
+}
+
+#gridSize{
+  margin-top: 5px;
+}
 #gridWrapper {
   display: flex;
   width: 30vw;
@@ -33,4 +42,11 @@ body{
 }
 #column {
   flex: 1;
+}
+
+button, #colorPicker{
+  border-radius: 5px;
+}
+.btn-on {
+  background-color: rgb(92, 174, 206);
 }
