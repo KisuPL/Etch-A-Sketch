@@ -1,6 +1,6 @@
 body{
     display: flex;
-    height: 100dvh;
+    height: 100svh;
     justify-content: center;
     align-items: center;
 }
@@ -22,6 +22,8 @@ body{
 }
 #gridWrapper {
   display: flex;
+  width: 30vw;
+  height: 30vw;
 
 }
 #column {

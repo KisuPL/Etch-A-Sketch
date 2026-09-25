@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/svg+xml" href="icon.svg">
     <script src="scripts.js" defer></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
-
     <title>Etch-A-Sketch</title>
 </head>
 <body>
@@ -37,12 +35,12 @@
         document.body.touchstart = () => (mouseDown = true)
         document.body.touchend = () => (mouseDown = false)
 
-        let drawingAreaSize = ($(window).width())*0.4;
         let gridSize = 16;
         let gridWrapper = document.getElementById("gridWrapper");
-        gridWrapper.style.border="2px,solid,red";
-        gridWrapper.style.width=`${drawingAreaSize}px`;
-        gridWrapper.style.height=`${drawingAreaSize}px`;
+        let drawingAreaSize = window.getComputedStyle(gridWrapper).getPropertyValue("width").replace("px","");
+        gridWrapper.style.border="2px,solid,black";
+
+        
 
         for (let i = 0; i < gridSize; i++){
             let column = document.createElement("div");
@@ -53,7 +51,6 @@
 
             let columnList = document.querySelectorAll("#column");
             let columnArray = Array.from(columnList)
-            console.log(columnArray)
             columnArray.forEach(column => {
                 for (let j = 0; j < gridSize; j++){
                     let row = document.createElement("div");
