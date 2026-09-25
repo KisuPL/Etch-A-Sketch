@@ -24,6 +24,7 @@ body{
   display: flex;
   width: 30vw;
   height: 30vw;
+  border: 2px solid black
 
 }
 #column {

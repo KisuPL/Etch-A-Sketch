@@ -16,59 +16,72 @@
             <button>colour</button>
             <button>eraser</button>
             <button>clear</button>
+            <div>
+                <input onchange=updateGridSize(this) type="range" name="Grid size" id="gridSize" min="16" max="64">
+                <label for="gridSize">Grid size</label>
+            </div>
         </div>
         <div id="gridWrapper"></div>
     </div>
     <script>
 
-        function changeColor(e) {
-        if (!mouseDown) return
-        e.target.style.backgroundColor = "black";
-        }
-        
-        document.addEventListener("dragstart", e => e.preventDefault());
-        
-        let mouseDown = false
-        document.body.onmousedown = () => (mouseDown = true)
-        document.body.onmouseup = () => (mouseDown = false)
-
-        document.body.touchstart = () => (mouseDown = true)
-        document.body.touchend = () => (mouseDown = false)
-
-        let gridSize = 16;
-        let gridWrapper = document.getElementById("gridWrapper");
-        let drawingAreaSize = window.getComputedStyle(gridWrapper).getPropertyValue("width").replace("px","");
-        gridWrapper.style.border="2px,solid,black";
-
-        
-
+        function setUpDrawingArea(gridSize = 16) {
         for (let i = 0; i < gridSize; i++){
             let column = document.createElement("div");
             column.id = "column";
-            column.style.backgroundColor = "black"
+            column.style.backgroundColor = "black";
             gridWrapper.appendChild(column);
         }
 
             let columnList = document.querySelectorAll("#column");
-            let columnArray = Array.from(columnList)
+            let columnArray = Array.from(columnList);
             columnArray.forEach(column => {
                 for (let j = 0; j < gridSize; j++){
                     let row = document.createElement("div");
                     row.id = "row";
-                    row.style.width=`${drawingAreaSize/gridSize}px`
-                    row.style.height=`${drawingAreaSize/gridSize}px`
-                    row.style.backgroundColor = "white"
+                    row.style.width=`${drawingAreaSize/gridSize}px`;
+                    row.style.height=`${drawingAreaSize/gridSize}px`;
+                    row.style.backgroundColor = "white";
                     row.addEventListener("mouseover",() => {
-                        row.style.opacity = 0.5
+                        row.style.opacity = 0.5;
                     })
                     row.addEventListener("mouseout",() => {
-                        row.style.opacity = 1
+                        row.style.opacity = 1;
                     })
-                    row.addEventListener("touchmove", changeColor)
-                    row.addEventListener("mouseover",changeColor)
+                    row.addEventListener("mouseover",changeColor);
                     column.appendChild(row);
                 }
             })
+        }
+
+        function changeColor(e) {
+        if (!mouseDown) return
+        e.preventDefault()
+        e.target.style.backgroundColor = "black";
+        }
+        
+        function updateGridSize(size) {
+            while (gridWrapper.firstChild) {
+                gridWrapper.removeChild(gridWrapper.lastChild);
+            }
+            console.log(size.value)
+            setUpDrawingArea(size.value)
+        }
+
+
+        document.addEventListener("dragstart", e => e.preventDefault());
+
+        let mouseDown = false
+        document.body.onmousedown = () => (mouseDown = true)
+        document.body.onmouseup = () => (mouseDown = false)
+
+        let gridSize = document.getElementById("gridSize");
+
+        let gridWrapper = document.getElementById("gridWrapper");
+        let drawingAreaSize = window.getComputedStyle(gridWrapper).getPropertyValue("width").replace("px","");
+        
+        setUpDrawingArea(16);
+
 
     </script>
 </body>
