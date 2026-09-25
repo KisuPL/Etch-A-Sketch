@@ -11,7 +11,7 @@
 <body>
     <div id="main">
         <div class="settings">
-            <input id="colourPicker" type="color">
+            <input id="colorPicker" type="color">
             <button>not colour</button>
             <button>colour</button>
             <button>eraser</button>
@@ -54,21 +54,20 @@
             })
         }
 
-        function changeColor(e) {
-        if (!mouseDown) return
-        e.preventDefault()
-        e.target.style.backgroundColor = "black";
-        }
-        
         function updateGridSize(size) {
             while (gridWrapper.firstChild) {
                 gridWrapper.removeChild(gridWrapper.lastChild);
             }
-            console.log(size.value)
             setUpDrawingArea(size.value)
         }
 
-
+        function changeColor(e) {
+        if (!mouseDown) return
+        e.preventDefault()
+        let color = document.getElementById("colorPicker").value
+        e.target.style.backgroundColor = color;
+        }
+        
         document.addEventListener("dragstart", e => e.preventDefault());
 
         let mouseDown = false

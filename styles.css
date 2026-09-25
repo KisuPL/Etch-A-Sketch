@@ -20,6 +20,10 @@ body{
     gap: 3vh;
     flex-wrap: nowrap;
 }
+
+.settings * {
+  width: 75%;
+}
 #gridWrapper {
   display: flex;
   width: 30vw;
