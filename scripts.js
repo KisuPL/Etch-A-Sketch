@@ -34,6 +34,7 @@ for (let i = 0; i < gridSize; i++){
 }
 
 function updateGridSize() {
+    console.log(`changing grid size to ${gridSize.value}`)
     rainbow = false
     eraser = false
     rainbowButton.classList.remove("btn-on")
